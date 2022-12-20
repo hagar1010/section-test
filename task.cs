@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace OopSection;
 
-public abstract class Person
+public class Person
 {
     public string Name;
     public int Age;
@@ -21,8 +21,20 @@ public abstract class Person
         this.Age = age;
     }
 
-    public abstract void Print();
+    public virtual void Print(){}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 public class Student : Person
 {
@@ -49,6 +61,21 @@ public class Student : Person
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public class Staff : Person
 {
     public int Salary;
@@ -74,24 +101,23 @@ public class Staff : Person
     }
 }
 
-public class Other : Person
-{
-    public string Job;
 
-    public Other(string name, int age, string job) : base(name, age)
-    {
-        if (job != "student" && job != "staff")
-        {
-            throw new NullReferenceException("Invalid job");
-        }
-        this.Job = job;
-    }
 
-    public override void Print()
-    {
-        Console.WriteLine($"My name is {Name} , My age is {Age} , and I'm a {Job}");
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 public class Database
 {
@@ -108,9 +134,9 @@ public class Database
         People[current_index++] = staff;
     }
 
-    public void AddOther(Other other)
+    public void AddPerson(Person person)
     {
-        People[current_index++] = other;
+        People[current_index++] = person;
     }
 
     public void PrintAll()
@@ -121,6 +147,15 @@ public class Database
         }
     }
 }
+
+
+
+
+
+
+
+
+
 
 public class Program
 {
@@ -179,12 +214,10 @@ public class Program
                     var name3 = Console.ReadLine();
                     Console.Write("Age: ");
                     var age3 = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Job: ");
-                    var job = Console.ReadLine();
                     try
                     {
-                        var other = new Other(name3, age3, job);
-                        database.AddOther(other);
+                        var person = new Person(name3, age3);
+                        database.AddPerson(person);
                     }
                     catch (Exception ex)
                     {
@@ -203,3 +236,4 @@ public class Program
         }
     }
 }
+
